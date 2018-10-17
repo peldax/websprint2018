@@ -71,7 +71,7 @@ final class LoginForm extends BaseFormComponent
             'datetime' => new \Nette\Utils\DateTime(),
             'result' => (bool) $failure ? 'failure' : 'success',
             'ip_address' => inet_pton($this->request->getRemoteAddress()),
-            'username' => $values->username
+            'username' => $values->password
         ]);
 
         if ($failure)

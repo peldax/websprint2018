@@ -12,33 +12,34 @@ final class EventList extends BaseListComponent
 {
     protected const ACTIVE_FILTER = true;
 
-    /** @var EventModel */
-    protected $eventModel;
-
     public function __construct(EventModel $eventModel)
     {
         parent::__construct();
 
-        $this->eventModel = $eventModel;
+        $this->repository = $eventModel;
     }
 
     protected function modifyList(DataGrid $grid): DataGrid
     {
-        $grid->addColumnText('number', 'Číslo')
+        $grid->addColumnText('datetime', 'Datum objednávky')
             ->setSortable()
-            ->setFilterText();
-        $grid->addColumnText('password', 'Heslo')
-            ->setFilterText();
-        $grid->addColumnText('from', 'Obsazeno od')
             ->setRenderer(function ($row){
-                return $row->from ? $row->from->format('j.n.Y') : null;
-            })
-            ->setFilterDateRange();
-        $grid->addColumnText('to', 'obsazeno do')
+                return $row->datetime->format('j.n.Y H:i');
+            });
+        $grid->addColumnText('price', 'Cena')
+            ->setSortable();
+        $grid->addColumnText('room_id', 'Pokoj')
             ->setRenderer(function ($row){
-                return $row->from ? $row->from->format('j.n.Y') : null;
-            })
-            ->setFilterDateRange();
+                return $row->room->name;
+            });
+        $grid->addColumnText('service_id', 'Služba')
+            ->setRenderer(function ($row){
+                return $row->service->name;
+            });
+        $grid->addColumnText('subservice_id', 'Varianta')
+            ->setRenderer(function ($row){
+                return $row->subservice->name;
+            });
 
         return $grid;
     }

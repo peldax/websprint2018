@@ -14,3 +14,5 @@ services:
     - App\AdminModule\Component\IServiceListFactory
     - App\AdminModule\Component\ISubServiceListFactory
     - App\AdminModule\Component\IUsageStatFactory
+    - App\AdminModule\Component\IUserFormFactory
+    - App\AdminModule\Component\IUserListFactory
