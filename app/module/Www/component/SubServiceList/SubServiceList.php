@@ -12,34 +12,44 @@ final class SubServiceList extends BaseListComponent
 {
     protected const ACTIVE_FILTER = true;
 
-    /** @var SubServiceModel */
-    protected $subServiceModel;
+    /** @var int */
+    protected $serviceId;
 
     public function __construct(SubServiceModel $subServiceModel)
     {
         parent::__construct();
 
-        $this->subServiceModel = $subServiceModel;
+        $this->repository = $subServiceModel;
+    }
+
+    public function setId(int $id) : void
+    {
+        $this->serviceId = $id;
     }
 
     protected function modifyList(DataGrid $grid): DataGrid
     {
-        $grid->addColumnText('number', 'Číslo')
+        $grid->addColumnText('name', 'Jméno')
             ->setSortable()
             ->setFilterText();
-        $grid->addColumnText('password', 'Heslo')
+        $grid->addColumnText('price', 'Cena')
             ->setFilterText();
-        $grid->addColumnText('from', 'Obsazeno od')
+        $grid->addColumnText('availablefrom', 'Dostupná od')
             ->setRenderer(function ($row){
                 return $row->from ? $row->from->format('j.n.Y') : null;
             })
             ->setFilterDateRange();
-        $grid->addColumnText('to', 'obsazeno do')
+        $grid->addColumnText('availableto', 'Dostupná do')
             ->setRenderer(function ($row){
                 return $row->from ? $row->from->format('j.n.Y') : null;
             })
             ->setFilterDateRange();
 
         return $grid;
+    }
+
+    public function getDataSource()
+    {
+        return parent::getDataSource()->where('service_id', $this->serviceId);
     }
 }

@@ -8,5 +8,5 @@ use Nepttune\Model\BaseModel;
 
 final class SubServiceModel extends BaseModel
 {
-    public const TABLE_NAME = 'sub_service';
+    public const TABLE_NAME = 'subservice';
 }
