@@ -3,7 +3,7 @@ includes:
     - services.neon
 
 parameters:
-    domain: 'localhost'
+    domain: 'localhost.com'
     sessionName: 'websprint'
 
     meta:
