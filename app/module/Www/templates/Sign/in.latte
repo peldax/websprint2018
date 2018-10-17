@@ -1,0 +1,18 @@
+{layout $presenter->getCoreLayout()}
+{block #title}Přihlášení{/block}
+{block #bodyContent}
+
+<div class="container mt-5">
+    <div class="jumbotron" n:snippet="login">
+        <center><h1>{$meta['name']} <small>{$meta['version']}</small></h1></center>
+        {include $presenter->getFlashArea()}
+        <h2 class="mb-4">{icon unlock} {_admin.sign.in.title}</h2>
+        {if $admin}
+            {control loginForm}
+            <a href="{link admin!}" class="ajax">Přihlásit jako pokoj</a>
+        {else}
+            {control clientLoginForm}
+            <a href="{link admin!}" class="ajax">Přihlásit jako administrátor</a>
+        {/if}
+    </div>
+</div>

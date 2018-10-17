@@ -5,10 +5,10 @@ declare(strict_types = 1);
 namespace App\AdminModule\Presenter;
 
 use App\Model\ServiceModel;
-use App\WwwModule\Component\IServiceListFactory;
-use App\WwwModule\Component\ISubServiceListFactory;
-use App\WwwModule\Component\ServiceList;
-use App\WwwModule\Component\SubServiceList;
+use App\AdminModule\Component\IServiceListFactory;
+use App\AdminModule\Component\ISubServiceListFactory;
+use App\AdminModule\Component\ServiceList;
+use App\AdminModule\Component\SubServiceList;
 use Nepttune\Presenter\BaseAuthPresenter;
 
 final class ServicePresenter extends BaseAuthPresenter

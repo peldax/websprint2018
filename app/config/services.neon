@@ -1,15 +1,16 @@
 services:
     router: @routerFactory::createStandardRouter('Admin')
+    authenticator: App\Model\Authenticator
 
     - App\Model\RoomModel
     - App\Model\EventModel
     - App\Model\ServiceModel
     - App\Model\SubServiceModel
 
-    - App\WwwModule\Component\IEventFormFactory
-    - App\WwwModule\Component\IEventListFactory
-    - App\WwwModule\Component\ILoginFormFactory
-    - App\WwwModule\Component\IRoomListFactory
-    - App\WwwModule\Component\IServiceListFactory
-    - App\WwwModule\Component\ISubServiceListFactory
-    - App\WwwModule\Component\IUsageStatFactory
+    - App\AdminModule\Component\IEventFormFactory
+    - App\AdminModule\Component\IEventListFactory
+    - App\AdminModule\Component\ILoginFormFactory
+    - App\AdminModule\Component\IRoomListFactory
+    - App\AdminModule\Component\IServiceListFactory
+    - App\AdminModule\Component\ISubServiceListFactory
+    - App\AdminModule\Component\IUsageStatFactory
