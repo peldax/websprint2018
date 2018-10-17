@@ -1,0 +1,25 @@
+version: '3'
+services:
+    apache:
+        build:
+            context: ./
+            dockerfile: dockerfile
+        container_name: apache
+        depends_on: [ 'mariadb', 'redis' ]
+        ports: [ '80:80', '443:443' ]
+        volumes: [ '..:/var/www/html' ]
+    mariadb:
+        image: mariadb
+        container_name: mariadb
+        ports: [ '3306:3306' ]
+        volumes: [ '/var/lib/mysql:/var/lib/mysql' ]
+        environment:
+            MYSQL_ROOT_PASSWORD: example
+        logging:
+            driver: none
+    redis:
+        image: redis
+        container_name: redis
+        ports: [ '6379:6379' ]
+        logging:
+            driver: none
