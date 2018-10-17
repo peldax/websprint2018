@@ -3,8 +3,44 @@ includes:
     - services.neon
 
 parameters:
-    appName: 'Test'
-    appNameShort: 'TES'
+    domain: 'localhost.com'
+    sessionName: 'websprint'
+
+    meta:
+        name: 'Websprint'
+        nameShort: 'WSP'
+        version: '1.0'
+        description: 'websprint project'
+        keywords: 'websprint, project'
+        author: 'peldax.com'
+        robots: 'index, follow'
+        viewport: 'width=device-width, initial-scale=1, maximum-scale=2'
+        color: '#ffffff'
+
+    robots:
+        all:
+            name: '*'
+            disallow:
+
+    security:
+        contact: 'peldax@gmail.com'
+        acknowledgements: 'https://github.com/nepttune/nepttune/graphs/contributors'
+
+    dest:
+        homepage: ':Admin:Default:default'
+        userProfile: false
 
     configMenu:
         Menu:
+            room:
+                name: 'Pokoje'
+                dest: ':Admin:Room:default'
+                icon: 'bed'
+            service:
+                name: 'Služby'
+                dest: ':Admin:Service:default'
+                icon: 'utensils'
+            user:
+                name: 'Uživatelé'
+                dest: ':Admin:User:default'
+                icon: 'user'

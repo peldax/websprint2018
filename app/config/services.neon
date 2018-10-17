@@ -1,7 +1,15 @@
 services:
-    router: @routerFactory::createStandardRouter
+    router: @routerFactory::createStandardRouter('Admin')
 
     - App\Model\RoomModel
     - App\Model\EventModel
     - App\Model\ServiceModel
     - App\Model\SubServiceModel
+
+    - App\WwwModule\Component\IEventFormFactory
+    - App\WwwModule\Component\IEventListFactory
+    - App\WwwModule\Component\ILoginFormFactory
+    - App\WwwModule\Component\IRoomListFactory
+    - App\WwwModule\Component\IServiceListFactory
+    - App\WwwModule\Component\ISubServiceListFactory
+    - App\WwwModule\Component\IUsageStatFactory
