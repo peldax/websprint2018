@@ -1,6 +1,6 @@
 recaptcha:
-    siteKey: 'X'
-    secretKey: 'X'
+    siteKey: '6LfHeXUUAAAAACI1yVOp4Q-Fppcm5sK_zCbiQylo'
+    secretKey: '6LfHeXUUAAAAAEuKISlSFwDAoP-cjhyIdg2j_Qd5'
 
 database:
     default:
@@ -17,8 +17,8 @@ parameters:
         password: 'X'
     vapid:
         subject: '%domain%'
-        publicKey: 'X'
-        privateKey: 'X'
+        publicKey: 'BGs3rD_g7ZRTKMYNiPaV31vj_HTbY_BOr1ckQE15PWqOJFEAgQ1s1itugMTub38PQoWy8FXfDchO5SkeJNQtukU'
+        privateKey: 'bYqySxw44a8Ez0Kx9VMadPkGzNFuNRueaDq4QwnWdJE'
 
 #mail:
 #    smtp: true
