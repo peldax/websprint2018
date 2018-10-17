@@ -1,7 +1,7 @@
 {
   "require": {
-    "nepttune/nepttune": "^4.0",
-    "nepttune/admin": "^4.0",
+    "nepttune/nepttune": "4.15.3",
+    "nepttune/admin": "4.12.2",
     "nepttune/extra-navbar": "^4.0"
   },
   "scripts": {
