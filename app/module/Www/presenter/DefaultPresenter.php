@@ -2,11 +2,14 @@
 
 declare(strict_types = 1);
 
-namespace App\WwwModule\Presenter;
+namespace App\AdminModule\Presenter;
 
-use Nepttune\Presenter\BasePresenter;
+use Nepttune\Presenter\BaseAuthPresenter;
 
-final class DefaultPresenter extends BasePresenter
+final class DefaultPresenter extends BaseAuthPresenter
 {
+    public function actionDefault() : void
+    {
 
+    }
 }
