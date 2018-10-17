@@ -1,0 +1,13 @@
+{
+  "require": {
+    "nepttune/nepttune": "^4.0",
+    "nepttune/admin": "^4.0",
+    "nepttune/extra-navbar": "^4.0"
+  },
+  "scripts": {
+    "post-update-cmd": "Nepttune\\Deploy::init",
+    "post-install-cmd": "Nepttune\\Deploy::init"
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
+}
