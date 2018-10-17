@@ -12,7 +12,7 @@ services:
         image: mariadb
         container_name: mariadb
         ports: [ '3306:3306' ]
-        volumes: [ '/var/lib/mysql:/var/lib/mysql' ]
+        volumes: [ '/Users/jb/Projects/websprint2018/sql'  ]
         environment:
             MYSQL_ROOT_PASSWORD: example
         logging:
