@@ -4,8 +4,8 @@ declare(strict_types = 1);
 
 namespace App\AdminModule\Presenter;
 
-use App\WwwModule\Component\IRoomListFactory;
-use App\WwwModule\Component\RoomList;
+use App\AdminModule\Component\IRoomListFactory;
+use App\AdminModule\Component\RoomList;
 use Nepttune\Presenter\BaseAuthPresenter;
 
 final class RoomPresenter extends BaseAuthPresenter

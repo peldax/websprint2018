@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace App\WwwModule\Component;
+namespace App\AdminModule\Component;
 
 use App\Model\SubServiceModel;
 use Nepttune\Component\BaseComponent;

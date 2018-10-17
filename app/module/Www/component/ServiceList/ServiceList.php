@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace App\WwwModule\Component;
+namespace App\AdminModule\Component;
 
 use App\Enum\EServiceType;
 use App\Model\ServiceModel;
@@ -31,6 +31,7 @@ final class ServiceList extends BaseListComponent
         $grid->addColumnText('description', 'Popis')
             ->setFilterText();
         $grid->addColumnText('price', 'Cena')
+            ->setSortable()
             ->setFilterText();
         $grid->addColumnText('icon', 'Ikona')
             ->setFilterText();
@@ -38,7 +39,7 @@ final class ServiceList extends BaseListComponent
             ->setRenderer(function ($row){
                 return EServiceType::ENUM[$row->type];
             })
-            ->setFilterDateRange();
+            ->setFilterSelect(['' => 'Vše'] + EServiceType::ENUM);
 
         return $grid;
     }

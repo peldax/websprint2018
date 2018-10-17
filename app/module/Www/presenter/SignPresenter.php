@@ -4,12 +4,22 @@ declare(strict_types = 1);
 
 namespace App\AdminModule\Presenter;
 
+use App\AdminModule\Component\ILoginFormFactory;
+
 final class SignPresenter extends \Nepttune\Presenter\SignPresenter
 {
-    protected function createComponentLoginForm() : App\AdminModule\Component\LoginForm
+    /** @var ILoginFormFactory */
+    protected $iClientLoginFormFactory;
+
+    public function __construct(ILoginFormFactory $iClientLoginFormFactory, \Nepttune\Component\ILoginFormFactory $ILoginFormFactory)
     {
-        $control = $this->iLoginFormFactory->create();
-        $control->setRedirect($this->dest['adminHomepage']);
-        return $control;
+        parent::__construct($ILoginFormFactory);
+
+        $this->iClientLoginFormFactory = $iClientLoginFormFactory;
+    }
+
+    protected function createComponentClientLoginForm() : \App\AdminModule\Component\LoginForm
+    {
+        return $this->iClientLoginFormFactory->create();
     }
 }

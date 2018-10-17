@@ -2,16 +2,13 @@
 
 declare(strict_types = 1);
 
-namespace App\WwwModule\Component;
+namespace App\AdminModule\Component;
 
 use Nepttune\Component\BaseFormComponent;
 use \Nette\Application\UI\Form;
 
 final class LoginForm extends BaseFormComponent
 {
-    /** @var  string */
-    protected $redirectSignIn;
-
     /** @var  \Nepttune\Model\LoginLogModel */
     protected $loginLogModel;
 
@@ -85,6 +82,6 @@ final class LoginForm extends BaseFormComponent
 
         $this->getPresenter()->flashMessage($this->translator->translate('admin.flash.sign_in'), 'success');
         $this->getPresenter()->restoreRequest($this->getPresenter()->getParameter('backlink'));
-        $this->getPresenter()->redirect($this->redirectSignIn);
+        $this->getPresenter()->redirect(':Admin:Default:default');
     }
 }

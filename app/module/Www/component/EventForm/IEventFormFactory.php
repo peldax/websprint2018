@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace App\WwwModule\Component;
+namespace App\AdminModule\Component;
 
 interface IEventFormFactory
 {

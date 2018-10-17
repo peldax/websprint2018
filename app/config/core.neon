@@ -28,7 +28,9 @@ parameters:
 
     dest:
         homepage: ':Admin:Default:default'
+        adminHomepage: ':Admin:Default:default'
         userProfile: false
+        signOut: ':Admin:Sign:out'
 
     configMenu:
         Menu:
