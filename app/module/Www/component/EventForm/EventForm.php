@@ -64,8 +64,10 @@ final class EventForm extends BaseComponent implements ITranslator
         $form->getElementPrototype()->addAttributes(['class' => 'ajax']);
 
         $form->addSelect('service_id', 'Služba', $this->serviceModel->findActive()->fetchPairs('id', 'name'))
-            ->setPrompt('--- Vyberte ---');
+            ->setPrompt('--- Vyberte ---')
+            ->setRequired();
         $form->addDependentSelectBox('subservice_id', 'Varianta', $form['service_id'])
+            ->setRequired()
             ->setDependentCallback(function ($values)
             {
                 if (!$values['service_id'])
@@ -117,7 +119,13 @@ final class EventForm extends BaseComponent implements ITranslator
         $form->addProtection('form.error.csrf');
         $form->getElementPrototype()->addAttributes(['class' => 'ajax']);
 
-        $form->addDatePicker('')
+        $form->addDatePicker('calday', 'Který den')
+            ->setRequired();
+        $form->addSelect('from', 'V kolik hodin', [
+            '00:00:00' => '0:00',
+            '00:01:00' => '1:00',
+            '00:02:00' => '2:00',
+        ]);
 
         $form->addSubmit('back', 'Zpět');
         $submit = $form->addSubmit('submit', 'Pokračovat');
@@ -148,7 +156,6 @@ final class EventForm extends BaseComponent implements ITranslator
         $form->setTranslator($this->translator);
         $form->setRenderer(new \Nextras\Forms\Rendering\Bs3FormRenderer());
         $form->addProtection('form.error.csrf');
-        $form->getElementPrototype()->addAttributes(['class' => 'ajax']);
 
         $form->addSubmit('back', 'Zpět');
         $submit = $form->addSubmit('submit', 'Objednat');
@@ -156,20 +163,15 @@ final class EventForm extends BaseComponent implements ITranslator
 
         $form->onSuccess[] = [$this, 'formStep3Success'];
 
-        if (isset($this->sessionSection->step2))
-        {
-            $form->setDefaults($this->sessionSection->step2);
-        }
-
         return $form;
     }
 
     public function formStep3Success(Form $form, \stdClass $values) : void
     {
-        $this->sessionSection->step2 = $values;
+        $data = \array_merge($this->sessionSection->step1, $this->sessionSection->step2);
 
-        $this->step = $this->step + ($form->isSubmitted() === 'submit' ? 1 : -1);
+        $this->eventModel->insert($data);
 
-        $this->event
+        $this->redirect(':Admin:Default:success');
     }
 }

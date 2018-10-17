@@ -139,9 +139,6 @@ CREATE TABLE IF NOT EXISTS `event`
   `subservice_id`    INT(10) UNSIGNED            NOT NULL,
   `calday`   DATE               DEFAULT NULL,
   `start`   TIME                DEFAULT NULL,
-  `end`   TIME                DEFAULT NULL,
-  `registered` DATE                        NOT NULL,
-  `root`       TINYINT DEFAULT 0           NOT NULL,
   `active`     TINYINT DEFAULT 1           NOT NULL,
 
   CONSTRAINT `event_role_id_fk`
