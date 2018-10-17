@@ -112,17 +112,21 @@ CREATE TABLE IF NOT EXISTS `room` (
   `number`     int(10)         NOT NULL,
   `password`       VARCHAR(255)                NOT NULL,
   `from`     DATETIME               NOT NULL,
-  `to`       DATETIME               NOT NULL
+  `to`       DATETIME               DEFAULT NULL
   
 ) ENGINE = INNODB;
 
 CREATE TABLE IF NOT EXISTS `subservice` (
   `id`          INT(10) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
   `name`     VARCHAR(255)         NOT NULL,
+  `service_id`    INT(10) UNSIGNED            NOT NULL,
   `description`     VARCHAR(255)         DEFAULT NULL,
   `price`       INT(11)                NOT NULL,
   `availablefrom`     DATETIME               DEFAULT NULL,
   `availableto`       DATETIME               DEFAULT NULL
+
+  CONSTRAINT `subservice_service_id_fk`
+  FOREIGN KEY (`service_id`) REFERENCES `service` (`id`)
   
 ) ENGINE = INNODB;
 
