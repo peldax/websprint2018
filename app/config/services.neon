@@ -1,1 +1,7 @@
 services:
+    router: @routerFactory::createStandardRouter
+
+    - App\Model\RoomModel
+    - App\Model\EventModel
+    - App\Model\ServiceModel
+    - App\Model\SubServiceModel

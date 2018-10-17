@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS `log_login`
   `ip_address` VARBINARY(16)               NOT NULL,
   `username`   VARCHAR(255)                NOT NULL,
   `result`     ENUM('success', 'failure')  NOT NULL,
-  `datetime`   DATETIME                    NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `datetime`   DATETIME                    NOT NULL DEFAULT CURRENT_TIMESTAMP,
   
   INDEX `log_login_ip_address_index` (`ip_address`)
 ) ENGINE = INNODB;
@@ -59,7 +59,7 @@ CREATE TABLE IF NOT EXISTS `role_access`
 CREATE TABLE IF NOT EXISTS `user`
 (
   `id`         INT(10) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-  `role_id`    INT(10) UNSIGNED            NOT NULL,
+  `role_id`    INT(10) UNSIGNED            DEFAULT NULL,
   `username`   VARCHAR(255)                NOT NULL,
   `password`   VARCHAR(255)                NOT NULL,
   `registered` DATE                        NOT NULL,
@@ -125,18 +125,21 @@ CREATE TABLE IF NOT EXISTS `subservice` (
 CREATE TABLE IF NOT EXISTS `event`
 (
   `id`         INT(10) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  `datetime`   DATETIME DEFAULT CURRENT_TIMESTAMP,
   `room_id`    INT(10) UNSIGNED            NOT NULL,
   `service_id`    INT(10) UNSIGNED            NOT NULL,
   `subservice_id`    INT(10) UNSIGNED            NOT NULL,
-  `calday`   DATE               NOT NULL,
-  `start`   TIME                NOT NULL,
-  `end`   TIME                NOT NULL,
+  `calday`   DATE               DEFAULT NULL,
+  `start`   TIME                DEFAULT NULL,
+  `end`   TIME                DEFAULT NULL,
   `registered` DATE                        NOT NULL,
   `root`       TINYINT DEFAULT 0           NOT NULL,
   `active`     TINYINT DEFAULT 1           NOT NULL,
 
-  CONSTRAINT `user_role_id_fk`
+  CONSTRAINT `event_role_id_fk`
   FOREIGN KEY (`room_id`) REFERENCES `room` (`id`),
+  CONSTRAINT `event_service_id_fk`
   FOREIGN KEY (`service_id`) REFERENCES `service` (`id`),
+  CONSTRAINT `event_subservice_id_fk`
   FOREIGN KEY (`subservice_id`) REFERENCES `subservice` (`id`)
 ) ENGINE = INNODB;
