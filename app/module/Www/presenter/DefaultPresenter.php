@@ -10,6 +10,13 @@ final class DefaultPresenter extends BaseAuthPresenter
 {
     public function actionDefault() : void
     {
-
+        if ($this->user->isInRole('room'))
+        {
+            $this->template->setFile(__DIR__ . '/../templates/Default/customer.latte');
+        }
+        else
+        {
+            $this->template->setFile(__DIR__ . '/../templates/Default/admin.latte');
+        }
     }
 }
