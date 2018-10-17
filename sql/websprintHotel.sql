@@ -100,6 +100,8 @@ CREATE TABLE IF NOT EXISTS `service` (
   `price`       INT(11)                NOT NULL,
   `type`        ENUM('singleuse','timeduse','uniquetimeduse')                NOT NULL,
   `description`       VARCHAR(255)                NOT NULL,
+    `active`     TINYINT DEFAULT 1           NOT NULL,
+
   `icon`    VARCHAR(255)                NOT NULL
   
 ) ENGINE = INNODB;

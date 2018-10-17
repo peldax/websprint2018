@@ -42,6 +42,9 @@ RUN a2enmod ssl && \
     a2enmod include && \
     a2enmod autoindex
 
+RUN echo 'ServerName localhost' >> /etc/apache2/apache2.conf
+
+
 # Install PHP
 RUN apt-get update && apt-get install -y --no-install-recommends \
     php7.2 \
