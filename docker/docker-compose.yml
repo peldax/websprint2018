@@ -5,7 +5,7 @@ services:
             context: ./
             dockerfile: dockerfile
         container_name: apache
-        depends_on: [ 'mariadb', 'redis', 'rabbitmq', 'mongo' ]
+        depends_on: [ 'mariadb', 'redis' ]
         ports: [ '80:80', '443:443' ]
         volumes: [ '..:/var/www/html' ]
     mariadb:
@@ -23,31 +23,3 @@ services:
         ports: [ '6379:6379' ]
         logging:
             driver: none
-    rabbitmq:
-        image: rabbitmq:management
-        container_name: rabbitmq
-        ports: [ '5672:5672', '15672:15672' ]
-        logging:
-            driver: none
-    mongo:
-        image: mongo
-        container_name: mongo
-        ports: [ '27017:27017' ]
-        logging:
-            driver: none
-    #scylla:
-    #    image: scylladb/scylla
-    #    container_name: scylla
-    #    ports:
-    #      - '9160:9160'
-    #    logging:
-    #        driver: none
-    #elasticsearch:
-    #    image: docker.elastic.co/elasticsearch/elasticsearch:6.2.3
-    #    container_name: elasticsearch
-    #    ports:
-    #     - '9200:9200'
-    #    logging:
-    #        driver: none
-
-
