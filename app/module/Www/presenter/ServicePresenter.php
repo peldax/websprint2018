@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 namespace App\AdminModule\Presenter;
 
+use App\Model\ServiceModel;
 use App\WwwModule\Component\IServiceListFactory;
 use App\WwwModule\Component\ISubServiceListFactory;
 use App\WwwModule\Component\ServiceList;
@@ -18,14 +19,19 @@ final class ServicePresenter extends BaseAuthPresenter
     /** @var ISubServiceListFactory */
     protected $ISubServiceListFactory;
 
+    /** @var ServiceModel */
+    protected $serviceModel;
+
     public function __construct(
         IserviceListFactory $IServiceListFactory,
-        ISubServiceListFactory $ISubServiceListFactory)
+        ISubServiceListFactory $ISubServiceListFactory,
+        ServiceModel $serviceModel)
     {
         parent::__construct();
 
         $this->IServiceListFactory = $IServiceListFactory;
         $this->ISubServiceListFactory = $ISubServiceListFactory;
+        $this->serviceModel = $serviceModel;
     }
 
     protected function createComponentServiceList() : ServiceList
@@ -55,7 +61,7 @@ final class ServicePresenter extends BaseAuthPresenter
      */
     public function actionSub(int $id) : void
     {
-
+        $this->template->row = $this->serviceModel->findRow($id)->fetch();
     }
 }
 

@@ -4,42 +4,51 @@ declare(strict_types = 1);
 
 namespace App\WwwModule\Component;
 
+use App\Enum\EServiceType;
 use App\Model\ServiceModel;
 use Nepttune\Component\BaseListComponent;
+use Nette\Utils\Html;
 use Ublaboo\DataGrid\DataGrid;
 
 final class ServiceList extends BaseListComponent
 {
     protected const ACTIVE_FILTER = true;
-
-    /** @var ServiceModel */
-    protected $serviceModel;
+    protected $inlineAdd = true;
+    protected $inlineEdit = true;
 
     public function __construct(ServiceModel $serviceModel)
     {
         parent::__construct();
 
-        $this->serviceModel = $serviceModel;
+        $this->repository = $serviceModel;
     }
 
     protected function modifyList(DataGrid $grid): DataGrid
     {
-        $grid->addColumnText('number', 'Číslo')
+        $grid->addColumnLink('name', 'Jméno', ':Admin:Service:sub')
             ->setSortable()
             ->setFilterText();
-        $grid->addColumnText('password', 'Heslo')
+        $grid->addColumnText('description', 'Popis')
             ->setFilterText();
-        $grid->addColumnText('from', 'Obsazeno od')
+        $grid->addColumnText('price', 'Cena')
+            ->setFilterText();
+        $grid->addColumnText('icon', 'Ikona')
+            ->setFilterText();
+        $grid->addColumnText('type', 'Type')
             ->setRenderer(function ($row){
-                return $row->from ? $row->from->format('j.n.Y') : null;
-            })
-            ->setFilterDateRange();
-        $grid->addColumnText('to', 'obsazeno do')
-            ->setRenderer(function ($row){
-                return $row->from ? $row->from->format('j.n.Y') : null;
+                return EServiceType::ENUM[$row->type];
             })
             ->setFilterDateRange();
 
         return $grid;
+    }
+
+    public function modifyInlineForm(\Nette\Forms\Container $container): void
+    {
+        $container->addText('name')->setRequired();
+        $container->addText('description')->setRequired();
+        $container->addInteger('price')->setRequired();
+        $container->addText('icon')->setRequired();
+        $container->addSelect('type', null, EServiceType::ENUM)->setRequired();
     }
 }

@@ -12,14 +12,11 @@ final class RoomList extends BaseListComponent
 {
     protected const ACTIVE_FILTER = true;
 
-    /** @var RoomModel */
-    protected $roomModel;
-
     public function __construct(RoomModel $roomModel)
     {
         parent::__construct();
 
-        $this->roomModel = $roomModel;
+        $this->repository = $roomModel;
     }
 
     protected function modifyList(DataGrid $grid): DataGrid
