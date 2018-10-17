@@ -1,0 +1,10 @@
+includes:
+    - sensitive.neon
+    - services.neon
+
+parameters:
+    appName: 'Test'
+    appNameShort: 'TES'
+
+    configMenu:
+        Menu:
