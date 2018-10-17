@@ -59,7 +59,7 @@ final class LoginForm extends BaseFormComponent
 
         try
         {
-            $this->user->login($values->username, $values->password);
+            $this->user->login(null, $values->password);
             $this->user->setExpiration(0, TRUE);
         }
         catch (\Nette\Security\AuthenticationException $e)

@@ -29,6 +29,7 @@ final class Authenticator extends \Nepttune\Model\Authenticator
         if ($row)
         {
             $data = $row->toArray();
+            $data['username'] = 'Pokoj #' . $data['id'];
             unset($data['password']);
 
             return new \Nette\Security\Identity($row->id, ['room'], $data);
