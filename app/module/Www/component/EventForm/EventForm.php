@@ -53,6 +53,18 @@ final class EventForm extends BaseComponent implements ITranslator
         parent::beforeRender();
 
         $this->template->step = $this->step ?? 1;
+
+        if ($this->step === 3)
+        {
+            $this->template->service = $this->serviceModel->findRow($this->sessionSection->step1->service_id)->fetch();
+            $this->template->subservice = $this->subServiceModel->findRow($this->sessionSection->step1->subservice_id)->fetch();
+
+            if (!empty($this->sessionSection->step2))
+            {
+                $this->template->date = $this->sessionSection->step2->date;
+                $this->template->time = $this->sessionSection->step2->from;
+            }
+        }
     }
 
     protected function createComponentFormStep1(): Form
@@ -123,9 +135,14 @@ final class EventForm extends BaseComponent implements ITranslator
             ->setRequired();
         $form->addSelect('from', 'V kolik hodin', [
             '00:00:00' => '0:00',
-            '00:01:00' => '1:00',
-            '00:02:00' => '2:00',
+            '01:00:00' => '1:00',
+            '02:00:00' => '2:00',
         ]);
+
+        if ($this->serviceModel->findRow($this->sessionSection->step1->service_id)->fetch()->type)
+        {
+            $form['from']->addRule([$this, 'validateAvailability'], 'Služba v tento čas není dostupná');
+        }
 
         $form->addSubmit('back', 'Zpět');
         $submit = $form->addSubmit('submit', 'Pokračovat');
@@ -145,7 +162,7 @@ final class EventForm extends BaseComponent implements ITranslator
     {
         $this->sessionSection->step2 = $values;
 
-        $this->step = $this->step + ($form->isSubmitted() === 'submit' ? 1 : -1);
+        $this->step = $form->isSubmitted() === 'submit' ? 3 : 1;
 
         $this->redrawControl('eventFormSnippet');
     }
@@ -168,10 +185,21 @@ final class EventForm extends BaseComponent implements ITranslator
 
     public function formStep3Success(Form $form, \stdClass $values) : void
     {
-        $data = \array_merge($this->sessionSection->step1, $this->sessionSection->step2);
+        if ($form->isSubmitted() !== 'submit')
+        {
+            $this->step = 2;
+            $this->redrawControl('eventFormSnippet');
+            return;
+        }
 
+        $data = \array_merge($this->sessionSection->step1, $this->sessionSection->step2);
         $this->eventModel->insert($data);
 
         $this->redirect(':Admin:Default:success');
+    }
+
+    public function validateAvailability($control) : bool
+    {
+        return true;
     }
 }

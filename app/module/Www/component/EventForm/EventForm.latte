@@ -4,7 +4,18 @@
             {control formStep1}
         {case 2}
             {control formStep2}
-        {case 2}
+        {case 3}
+            <div class="box box-danger">
+                <div class="box-header">
+                    <h3>Rekapitulace</h3>
+                </div>
+                <div class="box-body">
+                    <p>Objednáváte {$service->name} ({$subservice->name}).</p>
+                    {ifset $date}
+                        <p>V {$date} v {$time} hodin.</p>
+                    {/ifset}
+                </div>
+            </div>
             {control formStep3}
     {/switch}
 {/snippet}
